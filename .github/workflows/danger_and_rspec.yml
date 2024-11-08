@@ -45,9 +45,9 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle config set frozen false && bundle clean --force && gem install bundler && bundle update --bundler && bundle install
+        run: bundle install
 
       - name: Run Danger
-        run: danger
+        run: bundle install uri && bundle exec danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
