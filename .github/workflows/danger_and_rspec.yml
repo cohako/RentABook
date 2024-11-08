@@ -45,7 +45,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle clean --force && gem install bundler && bundle update --bundler && bundle install
+        run: bundle config set frozen false && bundle clean --force && gem install bundler && bundle update --bundler && bundle install
 
       - name: Run Danger
         run: bundle exec danger
