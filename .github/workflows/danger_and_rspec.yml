@@ -1,0 +1,53 @@
+name: Danger and Rspec
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions: write-all
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Configure app and docker
+        run: |
+          cp .env.sample .env
+          docker network create rent_a_book
+      - name: Build docker
+        run: docker compose build
+      - name: Setup DB
+        run: docker compose run web bundle exec rails db:prepare
+      - name: Run tests
+        run: docker compose run web bundle exec rspec
+
+  danger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.0'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: gem update --system && bundle install
+
+      - name: Run Danger
+        run: bundle exec danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
