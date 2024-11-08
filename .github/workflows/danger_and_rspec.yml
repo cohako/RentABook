@@ -21,7 +21,7 @@ jobs:
       - name: Configure app and docker
         run: |
           cp .env.sample .env
-          docker network create bioritmo
+          docker network create rent_a_book
       - name: Build docker
         run: docker compose build
       - name: Setup DB
