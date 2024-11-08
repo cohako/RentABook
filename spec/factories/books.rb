@@ -3,5 +3,6 @@ FactoryBot.define do
     title { "MyString" }
     synopsis { "MyText" }
     published_at { "2024-11-07" }
+    author
   end
 end
