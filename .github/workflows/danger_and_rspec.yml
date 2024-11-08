@@ -45,9 +45,9 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle install
+        run: gem update --system && bundle install
 
       - name: Run Danger
-        run: bundle install uri && bundle exec danger
+        run: bundle exec danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
