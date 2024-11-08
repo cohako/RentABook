@@ -48,6 +48,6 @@ jobs:
         run: bundle config set frozen false && bundle clean --force && gem install bundler && bundle update --bundler && bundle install
 
       - name: Run Danger
-        run: bundle exec danger
+        run: danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
