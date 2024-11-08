@@ -20,7 +20,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Configure app and docker
         run: |
-          cp .env.docker_sample .env
+          cp .env.sample .env
           docker network create bioritmo
       - name: Build docker
         run: docker compose build
