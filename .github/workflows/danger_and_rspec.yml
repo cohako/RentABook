@@ -41,11 +41,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.1'
+          ruby-version: '3.0.0'
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle install
+        run: bundle clean --force && bundle install
 
       - name: Run Danger
         run: bundle exec danger

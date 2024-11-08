@@ -328,7 +328,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  danger (~> 9.5)
+  danger
   danger-brakeman
   danger-rubocop
   danger-rubyc
